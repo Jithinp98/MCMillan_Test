@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="customer_payment_pdf_report_template">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <style type="text/css">
+                    .table_main_head {
+                    vertical-align : middle;
+                    font-weight: bold;
+                    }
+                </style>
+
+
+                <tr>
+                    <td class="table_main_head" width="15%" style="text-align:left;">Date and Time</td>
+                    <br/>
+                    <tr>
+                        <td style="text-align:left;"
+                            t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')">
+                        </td>
+                    </tr>
+                </tr>
+                <tr>
+                    <br/>
+                    <br/>
+<!--                    <td style="font-size: 30px; text-align:center;">-->
+                        <b style="font-size: 25px; text-align:center;">CUSTOMER PAYMENT PDF REPORT</b>
+<!--                    </td>-->
+                </tr>
+                <br>
+                </br>
+                <br/>
+                <br/>
+                <table colspan="5" width="100%">
+                    <tr style=" text-align:center; border-top:1px solid black ;border-bottom:1px solid black;border-left:1px solid black;border-right:1px solid black;">
+                        <td style="border-right:1px solid black; text-align:center;">
+                            <b>Sl.No</b>
+                        </td>
+                        <td style="border-right:1px solid black; text-align:center;">
+                            <b>Customer Name</b>
+                        </td>
+
+                        <td style="border-right:1px solid black; text-align:center;">
+                            <b>First Sale Date</b>
+                        </td>
+                        <td style="border-right:1px solid black; text-align:center;">
+                            <b>Total Sale Count</b>
+                        </td>
+
+                        <td style="border-right:1px solid black; text-align:center;">
+                            <b>Total Amount</b>
+                        </td>
+                        <td style="border-right:1px solid black; text-align:center;">
+                            <b>Paid Amount</b>
+                        </td>
+                        <td style="border-right:1px solid black; text-align:center;">
+                            <b>Balance Amount</b>
+                        </td>
+                    </tr>
+
+                    <t t-foreach="vals" t-as="val">
+                        <tr style="border-left:1px solid black;border-right:1px solid black; text-align:center;">
+                            <t t-set="sl_no" t-value="0"/>
+
+                            <t t-set="sl_no" t-value="sl_no + 1"/>
+
+                            <td style="border-right:1px solid black; text-align:center;border-bottom:1px solid black;">
+                                <span t-esc="sl_no"/>
+                            </td>
+                            <td style="border-right:1px solid black; text-align:center;border-bottom:1px solid black;">
+                                <span t-esc="val['partner_name']"/>
+                            </td>
+                            <td style="border-right:1px solid black; text-align:center;border-bottom:1px solid black;">
+                                <span t-esc="val['first_sales_date']"/>
+                            </td>
+                            <td style="border-right:1px solid black; text-align:center;border-bottom:1px solid black;">
+                                <span t-esc="'%.2f'%val['total_sale_count']"/>
+                            </td>
+                            <td style="border-right:1px solid black; text-align:center;border-bottom:1px solid black;">
+                                <span t-esc="'%.2f'%val['total_amount']"/>
+                            </td>
+                            <td style="border-bottom:1px solid black;border-right:1px solid black;">
+                                <span t-esc=" val['total_paid_amount']"/>
+                            </td>
+                            <td style="border-bottom:1px solid black;border-right:1px solid black;">
+                                <span t-esc=" val['balance_amount']"/>
+                            </td>
+
+                        </tr>
+
+
+                    </t>
+
+                </table>
+            </t>
+
+            <div class="footer o_standard_footer">
+                <div class="row text-center">
+                    <div class="col col-12 text-center">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                            <li>
+                                <span t-esc="user.name"/>&#160;-&#160;
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+
+    </template>
+</odoo>

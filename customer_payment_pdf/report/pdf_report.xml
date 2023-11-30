@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="paperformat_euro_lowmargin_payment_pdf" model="report.paperformat">
+        <field name="name">European A4 low margin</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">60</field>
+        <field name="margin_bottom">15</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">20</field>
+    </record>
+
+    <record id="customer_payment_pdf_report_print" model="ir.actions.report">
+        <field name="name">Customer Payment PDF Report</field>
+        <field name="model">customer.payment.pdf.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">customer_payment_pdf.customer_payment_pdf_report_template</field>
+        <field name="report_file">customer_payment_pdf.customer_payment_pdf_report_template</field>
+        <field name="paperformat_id" ref="customer_payment_pdf.paperformat_euro_lowmargin_payment_pdf"/>
+    </record>
+</odoo>
